@@ -15,11 +15,11 @@ jobs:
     steps:
       # 1. Checkout code
       - name: Checkout repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       # 2. Set up Docker Buildx (for modern builds)
       - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v2
+        uses: docker/setup-buildx-action@v3
 
       # 3. Build backend image
       - name: Build Backend Image
@@ -38,8 +38,9 @@ jobs:
           docker save my-backend:latest -o images/my-backend.tar
           docker save my-frontend:latest -o images/my-frontend.tar
 
+      # 6. Upload artifacts using latest version
       - name: Upload Images as Artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: docker-images
           path: images/
